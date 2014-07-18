@@ -101,7 +101,7 @@ function GetBrowser(){
 	var browser = "<?php echo($ua['name']) ?>";
 	var cookies = CheckCookies();
 	var dcookies = navigator.cookieEnabled;
-	if(dcookies == "true"){
+	if(dcookies == true){
 		dcookies = "Enabled";
 	}else{
 		dcookies = "Disabled";
