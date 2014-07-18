@@ -5,7 +5,8 @@ function getBrowser()
     $bname = 'Unknown';
     $platform = 'Unknown';
     $version= "";
-
+    $strPlatform = '';
+    
     //First get the platform?
     if (preg_match('/linux/i', $u_agent)) {
         $platform = 'linux';
@@ -75,13 +76,85 @@ function getBrowser()
    
     // check if we have a number
     if ($version==null || $version=="") {$version="?";}
+    
+    // Now that we have a version, convert Windows' versions to their actual deployment name
+    if (($platform == 'windows') && ($version != '?'))
+    {
+        $strPlatform = 'Windows';
+        
+        // Attempt to grab the NT version out here
+        $finds = array();
+        if (preg_match('/win[\w ]+[nt ][\w.]+/', strtolower($_SERVER['HTTP_USER_AGENT']), $finds) == 1)
+        {
+            // Now grab the version itself
+            $versionSet = array();
+            preg_match('/[\w]+\.[\w]+/', $finds[0], $versionSet);
+            $versionCompare = $versionSet[0];
+        }
+        
+        // If we don't have a major AND a minor, we are going to skip this
+        if (isset($versionCompare) && !empty($versionCompare))
+        {
+            switch(strval($versionCompare))
+            {
+                case '3.1':
+                    $strPlatform = 'Windows NT 3.1 [Server]';
+                    break;
+                    
+                case '3.5':
+                    $strPlatform = 'Windows NT 3.5 [Server]';
+                    break;
+                
+                case '3.51':
+                    $strPlatform = 'Windows NT 3.51 [Server]';
+                    break;
+                    
+                case '4.0':
+                    $strPlatform = 'Windows NT 4.0';
+                    break;
+                    
+                case '5.0':
+                    $strPlatform = 'Windows 2000';
+                    break;
+                    
+                case '5.1':
+                    $strPlatform = 'Windows XP [32-Bit]';
+                    break;
+                    
+                case '5.2':
+                    $strPlatform = 'Windows XP [64-Bit]';
+                    break;
+                    
+                case '6.0':
+                    $strPlatform = 'Windows Vista';
+                    break;
+                    
+                case '6.1':
+                    $strPlatform = 'Windows 7';
+                    break;
+                    
+                case '6.2':
+                    $strPlatform = 'Windows 8';
+                    break;
+                    
+                case '6.3':
+                    $strPlatform = 'Windows 8.1';
+                    break;
+                
+                default:
+                    $strPlatform = 'Windows [Unidentified]';
+                    break;
+            }
+        }
+    }
    
     return array(
         'userAgent' => $u_agent,
         'name'      => $bname,
         'version'   => $version,
         'platform'  => $platform,
-        'pattern'    => $pattern
+        'pattern'    => $pattern,
+        'strPlatform' => $strPlatform
     );
 }
 
@@ -115,7 +188,7 @@ function GetBrowser(){
 		java = "Disabled";
 	}
 	
-	var platform = navigator.platform;
+	var platform = "<?php echo($ua['strPlatform'] != '') ? $ua['strPlatform'] : 'navigator.platform'; ?>";
 	var version = "<?php echo($ua['version']) ?>";
 	var header = navigator.userAgent;
 
