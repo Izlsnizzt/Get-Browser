@@ -188,7 +188,7 @@ function GetBrowser(){
 		java = "Disabled";
 	}
 	
-	var platform = "<?php echo($ua['strPlatform'] != '') ? $ua['strPlatform'] : 'navigator.platform'; ?>";
+	var platform = <?php echo($ua['strPlatform'] != '') ? "\"{$ua['strPlatform']}\"" : 'navigator.platform'; ?>;
 	var version = "<?php echo($ua['version']) ?>";
 	var header = navigator.userAgent;
 
