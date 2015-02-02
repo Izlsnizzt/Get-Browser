@@ -58,7 +58,7 @@ function getBrowser()
     // finally get the correct version number
     $known = array('Version', $ub, 'other');
     $pattern = '#(?<browser>' . join('|', $known) .
-    ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+    ')[/ :]+(?<version>[0-9.|a-zA-Z.]*)#';
     preg_match_all($pattern, $u_agent, $matches);
    
     // see how many we have
