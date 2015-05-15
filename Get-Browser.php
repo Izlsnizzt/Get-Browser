@@ -24,6 +24,11 @@ function getBrowser()
         $bname = 'Internet Explorer';
         $ub = "MSIE";
     }
+    elseif(preg_match('/Edge\//i',$u_agent))
+    {
+        $bname = 'Edge';
+        $ub = "Edge";
+    }
     elseif(preg_match('/Trident/i',$u_agent))
     {
     	$bname = 'Internet Explorer';
@@ -142,6 +147,10 @@ function getBrowser()
                     
                 case '6.3':
                     $strPlatform = 'Windows 8.1';
+                    break;
+                
+                case '10.0':
+                    $strPlatform = 'Windows 10';
                     break;
                 
                 default:
