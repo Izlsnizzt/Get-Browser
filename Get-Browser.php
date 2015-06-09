@@ -39,6 +39,16 @@ function getBrowser()
         $bname = 'Mozilla Firefox';
         $ub = "Firefox";
     }
+    elseif(preg_match('/Opera/i',$u_agent))
+    {
+        $bname = 'Opera';
+        $ub = "Opera";
+    }
+    elseif(preg_match('/\bOPR\b/',$u_agent))
+    {
+        $bname = 'Opera';
+        $ub = "OPR";
+    }
     elseif(preg_match('/Chrome/i',$u_agent))
     {
         $bname = 'Google Chrome';
@@ -48,11 +58,6 @@ function getBrowser()
     {
         $bname = 'Apple Safari';
         $ub = "Safari";
-    }
-    elseif(preg_match('/Opera/i',$u_agent))
-    {
-        $bname = 'Opera';
-        $ub = "Opera";
     }
     elseif(preg_match('/Netscape/i',$u_agent))
     {
