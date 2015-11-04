@@ -212,7 +212,7 @@ function GetBrowser(){
 	var playerVersion = swfobject.getFlashPlayerVersion();
 	var flashver = playerVersion.major + "." + playerVersion.minor + "." + playerVersion.release;
 
-	document.getElementById('stoof').innerHTML = 'Please copy the information below:<br /><br />Browser Name: '+browser+'<br />Browser Version: '+version+'<br />Browser Platform: '+platform+'<br />Flash Version: '+flashver+'<br />Cookies (default): '+dcookies+'<br />Cookies (this domain): '+cookies+'<br />Javascript: '+java+'<br />User Agent: '+header;
+	document.getElementById('stoof').innerHTML = 'Please copy the information below:<br /><br />Browser Name: '+browser+'<br />Browser Version: '+version+'<br />Browser Platform: '+platform+'<br />Flash Version: '+flashver+'<br />Cookies (default): '+dcookies+'<br />Cookies (this domain): '+cookies+'<br />Java: '+java+'<br />User Agent: '+header;
 }
 
 function set_cookie ( name, value, exp_y, exp_m, exp_d, path, domain, secure ){
@@ -288,6 +288,7 @@ function SendEmail(){
 		<input type="hidden" id="javascript" name="javascript" value="moo">
 	</form>
 </div> -->
+<noscript>Javascript not enabled. Please enable.</noscript>
 </body>
 <script>GetBrowser();</script>
 </html>
